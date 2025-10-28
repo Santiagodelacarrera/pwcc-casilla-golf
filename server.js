@@ -158,8 +158,13 @@ app.get('/', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-    console.log(`Acceso desde la red local en: http://[TU_IP]:${PORT}`);
-});
+if (!process.env.VERCEL) {
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+        console.log(`Acceso desde la red local en: http://[TU_IP]:${PORT}`);
+    });
+}
+
+// Export for Vercel
+module.exports = app;
 
