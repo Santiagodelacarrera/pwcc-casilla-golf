@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWCC Casilla Golf - Sistema de Gestión</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="login-screen">
+            <div class="login-box">
+                <img src="logo.png" alt="PWCC Logo" class="logo-login">
+                <h1>PWCC Casilla Golf</h1>
+                <h2>Sistema de Gestión de Casillas</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Usuario</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn-login">Iniciar Sesión</button>
+                    <div id="loginError" class="error-message"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main Application -->
+        <div id="mainApp" class="main-app" style="display: none;">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-content">
+                    <img src="logo.png" alt="PWCC Logo" class="logo-header">
+                    <div class="header-info">
+                        <h1>PWCC Casilla Golf</h1>
+                        <p>Sistema de Gestión de Casillas</p>
+                    </div>
+                    <div class="user-info">
+                        <span id="currentUser"></span>
+                        <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-controls">
+                        <input type="text" id="searchInput" placeholder="Buscar socio..." class="search-input">
+                        <select id="searchType" class="search-type">
+                            <option value="all">Buscar en todo</option>
+                            <option value="nombre">Por Nombre</option>
+                            <option value="apellido">Por Apellido</option>
+                            <option value="socio">Por N° Socio</option>
+                            <option value="locker">Por Locker/Ubicación</option>
+                        </select>
+                        <button id="searchBtn" class="btn-search">Buscar</button>
+                        <button id="clearBtn" class="btn-clear">Limpiar</button>
+                    </div>
+                    <div class="results-info">
+                        <span id="resultsCount">Total: <span id="totalMembers">0</span> socios</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chatbot Section -->
+            <section class="chatbot-section" id="chatbotSection">
+                <button id="chatbotToggle" class="btn-chatbot-toggle">
+                    Cambio Base de Datos PWCC Golf <span class="toggle-icon">▼</span>
+                </button>
+                <div id="chatbotPanel" class="chatbot-panel" style="display: none;">
+                    <div class="chatbot-header">
+                        <h3>Asistente para Cambios en Base de Datos</h3>
+                        <p>Describe el cambio que deseas realizar</p>
+                    </div>
+                    <div id="chatMessages" class="chat-messages"></div>
+                    <div class="chat-input-container">
+                        <textarea id="chatInput" placeholder="Ejemplo: Cambiar locker de Felipe Martinez (N° socio 1234) del locker A-1 al locker B-16"></textarea>
+                        <button id="sendChatBtn" class="btn-send">Enviar</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Panel -->
+            <section id="adminPanel" class="admin-panel" style="display: none;">
+                <h3>Panel de Administración</h3>
+                <div class="admin-controls">
+                    <button id="showUsersBtn" class="btn-admin">Gestionar Usuarios</button>
+                </div>
+                <div id="userManagement" class="user-management" style="display: none;">
+                    <h4>Usuarios del Sistema</h4>
+                    <div class="add-user-form">
+                        <input type="text" id="newUsername" placeholder="Nuevo usuario">
+                        <input type="password" id="newPassword" placeholder="Contraseña">
+                        <select id="newUserRole">
+                            <option value="user">Usuario</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                        <button id="addUserBtn" class="btn-add-user">Agregar Usuario</button>
+                    </div>
+                    <div id="usersList"></div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div id="membersTable" class="members-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N° Socio</th>
+                                <th>Nombres</th>
+                                <th>Elemento</th>
+                                <th>Ubicación/Locker</th>
+                                <th>Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="membersTableBody">
+                            <!-- Members will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>Prince of Wales Country Club</h4>
+                        <p>Las Arañas 1901, Santiago de Chile<br>La Reina, Región Metropolitana</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Contacto</h4>
+                        <p>Teléfono: <a href="tel:+56227575700">+56 2 2757 5700</a></p>
+                    </div>
+                    <div class="footer-section">
+                        <p>&copy; 2025 PWCC. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

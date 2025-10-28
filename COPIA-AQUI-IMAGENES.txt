@@ -1,0 +1,26 @@
+═══════════════════════════════════════════════════════════════════
+    INSTRUCCIONES PARA AGREGAR LAS IMÁGENES
+═══════════════════════════════════════════════════════════════════
+
+ESTA ES LA CARPETA DONDE DEBES AGREGAR LAS IMÁGENES:
+C:\Users\santi\OneDrive\Documentos\pwcc oficial\public\
+
+PASOS:
+1. Encuentra la imagen del LOGO del PWCC
+2. Encuentra la imagen del CAMPO DE GOLF (vista aérea)
+3. Copia AMBAS imágenes a esta carpeta: public\
+4. RENOMBRA los archivos exactamente como:
+   - logo.png
+   - golf-background.jpg
+
+IMPORTANTE:
+- Los nombres deben ser EXACTAMENTE como los menciono arriba
+- Todo en minúsculas
+- Extensiones correctas: .png y .jpg
+
+Portugal de verificación:
+Este archivo está en la carpeta public/
+Ahora agrega logo.png y golf-background.jpg aquí mismo
+
+═══════════════════════════════════════════════════════════════════
+

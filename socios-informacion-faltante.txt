@@ -1,0 +1,220 @@
+═══════════════════════════════════════════════════════════════════
+    SOCIOS CON INFORMACIÓN FALTANTE - PWCC CASILLA GOLF            
+═══════════════════════════════════════════════════════════════════
+
+Fecha: 28/10/2025, 14:17:08
+
+──────────────────────────────────────────────────────────────────────────────────────────
+📦 SOCIOS SIN ELEMENTO (Total: 20)
+──────────────────────────────────────────────────────────────────────────────────────────
+
+1. Abascal Alberto
+   N° Socio: N/A
+   Ubicación: pasillo  388
+   Observación: N/A
+
+2. Braun Jones Pauline
+   N° Socio: 2507
+   Ubicación: N/A
+   Observación: Sin bolso en casilla, comprada
+
+3. De goyeneche andres
+   N° Socio: 2979
+   Ubicación: Pasillo - F2.4 - 709
+   Observación: N/A
+
+4. Donoso Saint Andres
+   N° Socio: 3671
+   Ubicación: N/A
+   Observación: Retiró sus cosas Forastero
+
+5. Emden Yaconi Max Andres
+   N° Socio: 3818
+   Ubicación: Nada en casilla
+   Observación: N/A
+
+6. Etchebarne benjamin
+   N° Socio: 4717
+   Ubicación: pasillo D2 . 12 - 447
+   Observación: N/A
+
+7. Gonzalez pablo
+   N° Socio: 4316
+   Ubicación: casilla -A 3.5 - 29
+   Observación: N/A
+
+8. Guzman cristobal
+   N° Socio: 4184
+   Ubicación: A 7.22 - 166
+   Observación: N/A
+
+9. Hardy Norton Andrew
+   N° Socio: 2479
+   Ubicación: N/A
+   Observación: Sin palos en casilla
+
+10. Malaiu Donovan Tiberio Tomas
+   N° Socio: 4158-2
+   Ubicación: pasillo 145
+   Observación: S/informacion
+
+11. Meyer Pantiner Alex
+   N° Socio: 3680
+   Ubicación: pasillo-A 2.14-89
+   Observación: N/A
+
+12. Mingo Elizalde Pablo José
+   N° Socio: 2255-6
+   Ubicación: N/A
+   Observación: Pendiente
+
+13. Montero Lira Juan Pablo
+   N° Socio: 1869
+   Ubicación: Pasillo 107
+   Observación: N/A
+
+14. Ossandon Zumaran Marcial
+   N° Socio: 1973
+   Ubicación: s/ inform, Vitalicio
+   Observación: N/A
+
+15. Precht  sebastian
+   N° Socio: 3747
+   Ubicación: Casilla  -A 7.23 - 167
+   Observación: N/A
+
+16. Rodriguez Arnal Matias
+   N° Socio: 3555
+   Ubicación: No tiene casilla
+   Observación: 10.958.739-7
+
+17. Rodriguez Lira Matias
+   N° Socio: 3555-2
+   Ubicación: No tiene casilla
+   Observación: 21.861.464-7
+
+18. Rodriguez Larrain Matias
+   N° Socio: N/A
+   Ubicación: No tiene casilla
+   Observación: 21.030.579-3
+
+19. Villavicencio jorge
+   N° Socio: 4512
+   Ubicación: pasillo -B2.9 - 216
+   Observación: N/A
+
+20. Zuleta Callejas Cristian
+   N° Socio: 4794
+   Ubicación: Pasillo B -273
+   Observación: N/A
+
+
+──────────────────────────────────────────────────────────────────────────────────────────
+📍 SOCIOS SIN UBICACIÓN (Total: 21)
+──────────────────────────────────────────────────────────────────────────────────────────
+
+1. Amenabar Villaseca Rafael
+   N° Socio: 43
+   Elemento: CMB
+   Observación: CM, colgado 1360 poniente
+
+2. Braun Jones Pauline
+   N° Socio: 2507
+   Elemento: N/A
+   Observación: Sin bolso en casilla, comprada
+
+3. Byrne Pope John
+   N° Socio: 2878
+   Elemento: CM
+   Observación: CM, colgado 1402, cordillera
+
+4. Cavada Arrau José Tomas
+   N° Socio: 4705-2
+   Elemento: Bolso
+   Observación: 25.567.721-7 en transito
+
+5. Donoso Saint Andres
+   N° Socio: 3671
+   Elemento: N/A
+   Observación: Retiró sus cosas Forastero
+
+6. Hardy Norton Andrew
+   N° Socio: 2479
+   Elemento: N/A
+   Observación: Sin palos en casilla
+
+7. Jackson Jackson Victoria
+   N° Socio: 756
+   Elemento: CM
+   Observación: CM, colgado bodega externa
+
+8. Labatut Soffia Ernesto
+   N° Socio: 688
+   Elemento: CEB
+   Observación: bateria en sala
+
+9. Mingo Elizalde Pablo José
+   N° Socio: 2255-6
+   Elemento: N/A
+   Observación: Pendiente
+
+10. Ossandon Villaseca Diego Andres
+   N° Socio: 3538
+   Elemento: CM
+   Observación: CM, colgado 1373 poniente
+
+11. Perez Spencer Cristobal Andres
+   N° Socio: 3764
+   Elemento: S/bolso
+   Observación: N/A
+
+12. Salgado Menchaca Clara
+   N° Socio: 2128
+   Elemento: CM
+   Observación: CM, colgado bodega externa
+
+13. Serrano Morgan Francisco
+   N° Socio: N/A
+   Elemento: bolso
+   Observación: Casilla 504
+
+14. Toro Anastassiou Patricio
+   N° Socio: 3000
+   Elemento: CM
+   Observación: CM, colgado bodega externa
+
+15. Villalabeitia Roa Eli Andres
+   N° Socio: 2321
+   Elemento: OJO
+   Observación: Trae carro y bolso
+
+16. Zilleruelo Asmussen Alejandro
+   N° Socio: 4019
+   Elemento: Bolso
+   Observación: no lo deja, los trae
+
+17. Zilleruelo Herrera Felipe Ignacio
+   N° Socio: 4019-7
+   Elemento: Bolso
+   Observación: Trae bolso
+
+18. Santis Mangiola Claudio
+   N° Socio: 3616
+   Elemento: s/inform
+   Observación: Pendiente
+
+19. Salomon Cristian
+   N° Socio: N/A
+   Elemento: S/inform
+   Observación: Pendiente
+
+20. Leyton Lopez Rodrigo
+   N° Socio: 2940
+   Elemento: Solo CM
+   Observación: renunciado 2 ruedas en bod externa
+
+21. Ribera Newmann Ana Maria
+   N° Socio: 1826-1
+   Elemento: CM
+   Observación: Fallecido 3 ruedas caucho, bodega externa
+
