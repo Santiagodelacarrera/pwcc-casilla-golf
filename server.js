@@ -160,8 +160,13 @@ app.get('/', (req, res) => {
 // Start server
 if (!process.env.VERCEL) {
     app.listen(PORT, '0.0.0.0', () => {
-        console.log(`Servidor corriendo en http://localhost:${PORT}`);
-        console.log(`Acceso desde la red local en: http://[TU_IP]:${PORT}`);
+        console.log(`🚀 Servidor PWCC Casilla Golf iniciado`);
+        console.log(`📡 Puerto: ${PORT}`);
+        if (process.env.RENDER) {
+            console.log(`☁️  Ejecutándose en Render.com`);
+        } else {
+            console.log(`💻 Servidor local en http://localhost:${PORT}`);
+        }
     });
 }
 

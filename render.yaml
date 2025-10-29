@@ -1,0 +1,13 @@
+# Configuración para Render.com (opcional)
+# Este archivo facilita el desplieg continues, pero Render también puede detectar automáticamente Node.js
+
+services:
+  - type: web
+    name: pwcc-casilla-golf
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+
