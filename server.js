@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const cors = require('cors');
+const os = require('os');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -157,15 +158,31 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Helper function to get local IP address
+function getLocalIP() {
+    const interfaces = os.networkInterfaces();
+    for (const name of Object.keys(interfaces)) {
+        for (const iface of interfaces[name]) {
+            // Skip internal (loopback) and non-IPv4 addresses
+            if (iface.family === 'IPv4' && !iface.internal) {
+                return iface.address;
+            }
+        }
+    }
+    return 'localhost';
+}
+
 // Start server
 if (!process.env.VERCEL) {
     app.listen(PORT, '0.0.0.0', () => {
+        const localIP = getLocalIP();
         console.log(`🚀 Servidor PWCC Casilla Golf iniciado`);
         console.log(`📡 Puerto: ${PORT}`);
         if (process.env.RENDER) {
             console.log(`☁️  Ejecutándose en Render.com`);
         } else {
-            console.log(`💻 Servidor local en http://localhost:${PORT}`);
+            console.log(`💻 Servidor local: http://localhost:${PORT}`);
+            console.log(`🌐 Acceso desde la red: http://${localIP}:${PORT}`);
         }
     });
 }
