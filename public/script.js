@@ -182,49 +182,137 @@ function addMessage(sender, text) {
 }
 
 async function processChatMessage(message) {
-    // Simple parsing for locker changes
-    const changeKeywords = ['cambiar', 'modificar', 'actualizar', 'mover'];
-    const hasChangeKeyword = changeKeywords.some(keyword => 
-        message.toLowerCase().includes(keyword)
-    );
+    const msg = message.toLowerCase();
+    
+    // Detect change keywords
+    const changeKeywords = ['cambiar', 'modificar', 'actualizar', 'mover', 'editar', 'poner', 'asignar'];
+    const hasChangeKeyword = changeKeywords.some(keyword => msg.includes(keyword));
     
     if (!hasChangeKeyword) {
         return { 
-            response: 'Por favor indica el cambio a realizar. Por ejemplo: "Cambiar locker de [nombre del socio] del locker A-1 al locker B-16"' 
+            response: 'Por favor indica el cambio a realizar. Ejemplos:\n' +
+                      '• "Cambiar locker de [nombre] del A-1 al B-16"\n' +
+                      '• "Cambiar elemento de [nombre] a CM"\n' +
+                      '• "Cambiar número de socio de [nombre] a 1234"\n' +
+                      '• "Cambiar observación de [nombre] a Nueva observación"'
         };
     }
     
-    // Extract member name or number
-    const memberMatch = message.match(/(?:socio|nombre)\s+([^,(\d]+)/i) || 
-                      message.match(/(?:n°|numero|número)\s+socio\s+(\d+)/i);
+    // Extract member identifier (name or number)
+    let memberIdentifier = null;
     
-    if (!memberMatch) {
-        return { response: 'No pude identificar el socio. Por favor indica el nombre o número de socio.' };
+    // Try to find by number first
+    const numberMatch = message.match(/(?:n°|numero|número|socio)\s*[:\-]?\s*(\d+)/i);
+    if (numberMatch) {
+        memberIdentifier = numberMatch[1];
     }
     
-    const memberIdentifier = memberMatch[1].trim();
+    // Try to find by name
+    if (!memberIdentifier) {
+        const namePatterns = [
+            /(?:socio|de|del)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)+)/i,
+            /([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)+)(?:\s+(?:tiene|está|locker|elemento))/i
+        ];
+        
+        for (const pattern of namePatterns) {
+            const match = message.match(pattern);
+            if (match) {
+                memberIdentifier = match[1].trim();
+                break;
+            }
+        }
+    }
     
-    // Extract old and new locker locations
+    if (!memberIdentifier) {
+        return { response: 'No pude identificar el socio. Por favor indica el nombre completo o número de socio.' };
+    }
+    
+    // Build update object based on detected changes
+    const updateData = {};
+    let changeDescription = '';
+    
+    // 1. Detect locker/ubicación changes
     const lockerPatterns = [
-        /locker\s*([A-Z]\s*-\s*\d+)/gi,
-        /pasillo\s*([A-Z]\d*\.?\d*\s*-\s*\d+)/gi,
-        /casilla\s*([A-Z]\d*\.?\d*\s*-\s*\d+)/gi
+        /(?:locker|casilla|ubicación|ubicacion|pasillo)\s+([A-Z]\s*-\s*\d+)/gi,
+        /(?:locker|casilla|ubicación|ubicacion|pasillo)\s+([A-Z]\d+)/gi,
+        /([A-Z]\s*-\s*\d+)/gi
     ];
     
     const locations = [];
-    lockerPatterns.forEach(pattern => {
+    for (const pattern of lockerPatterns) {
         const matches = message.matchAll(pattern);
         for (const match of matches) {
-            locations.push(match[1].replace(/\s+/g, ''));
+            const loc = match[1].replace(/\s+/g, '');
+            if (loc && !locations.includes(loc)) {
+                locations.push(loc);
+            }
         }
-    });
-    
-    if (locations.length < 2) {
-        return { response: 'No pude identificar ambas ubicaciones (origen y destino). Por favor especifica ambas ubicaciones.' };
     }
     
-    const oldLocation = 'Pasillo ' + locations[0];
-    const newLocation = 'Pasillo ' + locations[1];
+    if (locations.length >= 1) {
+        // If only one location, assume it's the new one
+        const newLocation = locations.length === 1 ? locations[0] : locations[locations.length - 1];
+        updateData.ubicacion = 'Pasillo ' + newLocation;
+        changeDescription = `ubicación a ${newLocation}`;
+    }
+    
+    // 2. Detect elemento changes
+    const elementoPatterns = [
+        /(?:elemento|element)\s+[:\-]?\s*(?:a|es|sea)\s*(Bolso|CM|CMB|CEB)/i,
+        /(?:cambiar|poner|asignar)\s+elemento\s+(?:a|como)\s*(Bolso|CM|CMB|CEB)/i,
+        /elemento\s+(Bolso|CM|CMB|CEB)/i
+    ];
+    
+    for (const pattern of elementoPatterns) {
+        const match = message.match(pattern);
+        if (match) {
+            updateData.elemento = match[1];
+            changeDescription = changeDescription ? changeDescription + `, elemento a ${match[1]}` : `elemento a ${match[1]}`;
+            break;
+        }
+    }
+    
+    // 3. Detect número de socio changes
+    const newSocioPattern = /(?:número|numero|n°)\s+de\s+socio\s+(?:a|es|sea|como)\s*(\d+)/i;
+    const newSocioMatch = message.match(newSocioPattern);
+    if (newSocioMatch) {
+        updateData.numeroSocio = newSocioMatch[1];
+        changeDescription = changeDescription ? changeDescription + `, número de socio a ${newSocioMatch[1]}` : `número de socio a ${newSocioMatch[1]}`;
+    }
+    
+    // 4. Detect observación changes
+    const obsPatterns = [
+        /(?:observación|observacion|observaciones)\s+[:\-]?\s*(?:a|es|sea|como)\s*(.+?)(?:\s+\.|$)/i,
+        /(?:cambiar|poner|asignar)\s+observaci[oó]n\s+(?:a|como)\s*(.+?)(?:\s+\.|$)/i
+    ];
+    
+    for (const pattern of obsPatterns) {
+        const match = message.match(pattern);
+        if (match) {
+            updateData.observacion = match[1].trim();
+            changeDescription = changeDescription ? changeDescription + `, observación actualizada` : `observación actualizada`;
+            break;
+        }
+    }
+    
+    // If no specific changes detected, try to infer from context
+    if (Object.keys(updateData).length === 0) {
+        // Maybe it's a locker change with "de X a Y" format
+        const deAPattern = /de\s+([A-Z]\s*-\s*\d+)\s+a\s+([A-Z]\s*-\s*\d+)/i;
+        const deAMatch = message.match(deAPattern);
+        if (deAMatch) {
+            updateData.ubicacion = 'Pasillo ' + deAMatch[2].replace(/\s+/g, '');
+            changeDescription = `ubicación de ${deAMatch[1]} a ${deAMatch[2]}`;
+        } else {
+            return { 
+                response: 'No pude identificar qué cambiar. Por favor especifica:\n' +
+                          '• Ubicación/locker: "cambiar locker a A-1"\n' +
+                          '• Elemento: "cambiar elemento a CM"\n' +
+                          '• Número de socio: "cambiar número de socio a 1234"\n' +
+                          '• Observación: "cambiar observación a Nueva nota"'
+            };
+        }
+    }
     
     // Make the update
     try {
@@ -235,7 +323,7 @@ async function processChatMessage(message) {
             },
             body: JSON.stringify({
                 memberIdentifier,
-                updateData: { ubicacion: newLocation }
+                updateData
             })
         });
         
@@ -245,7 +333,10 @@ async function processChatMessage(message) {
             // Reload members
             loadAllMembers();
             return { 
-                response: `✓ Cambio realizado exitosamente. ${data.member.nombres} ahora está en ${newLocation}.` 
+                response: `✓ Cambio realizado exitosamente.\n` +
+                         `Socio: ${data.member.nombres}\n` +
+                         `Cambios: ${changeDescription || 'Actualizado'}\n` +
+                         `${Object.keys(updateData).length > 0 ? '✓ Datos actualizados en la base de datos.' : ''}`
             };
         } else {
             return { response: data.message || 'No se pudo realizar el cambio.' };
@@ -268,11 +359,23 @@ async function loadUsers() {
         userManagement.style.display = 'block';
         
         try {
-            const response = await fetch('/api/users');
+            const response = await fetch('/api/users', {
+                headers: {
+                    'X-Current-User': currentUser.username
+                }
+            });
+            
+            if (!response.ok) {
+                const error = await response.json();
+                alert(error.message || 'No tienes permisos para ver usuarios');
+                return;
+            }
+            
             const users = await response.json();
             displayUsers(users);
         } catch (error) {
             console.error('Error loading users:', error);
+            alert('Error al cargar usuarios');
         }
     } else {
         userManagement.style.display = 'none';
@@ -314,7 +417,8 @@ async function addUser() {
         const response = await fetch('/api/users', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-Current-User': currentUser.username
             },
             body: JSON.stringify({ username, password, role })
         });
@@ -341,7 +445,10 @@ async function deleteUser(username) {
     
     try {
         const response = await fetch(`/api/users/${username}`, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'X-Current-User': currentUser.username
+            }
         });
         
         const data = await response.json();

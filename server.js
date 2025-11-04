@@ -104,11 +104,12 @@ app.post('/api/update-member', (req, res) => {
     // Find member by name or member number
     const memberIndex = members.findIndex(m => 
         m.nombres?.toLowerCase().includes(memberIdentifier.toLowerCase()) ||
-        m.numeroSocio?.toString() === memberIdentifier
+        m.numeroSocio?.toString() === memberIdentifier ||
+        m.numeroSocio?.toString() === memberIdentifier.toString()
     );
     
     if (memberIndex !== -1) {
-        // Update the member
+        // Update the member - permite actualizar cualquier campo
         members[memberIndex] = { ...members[memberIndex], ...updateData };
         writeJSONFile('data/members.json', members);
         
@@ -118,14 +119,28 @@ app.post('/api/update-member', (req, res) => {
     }
 });
 
-// User management (admin only)
-app.get('/api/users', (req, res) => {
+// Middleware to check if user is ADMINPWCC
+function requireAdminPWCC(req, res, next) {
+    const currentUsername = req.headers['x-current-user'] || req.body.currentUser || req.query.currentUser;
+    
+    if (!currentUsername || currentUsername !== 'ADMINPWCC') {
+        return res.status(403).json({ 
+            success: false, 
+            message: 'Solo el usuario ADMINPWCC puede realizar esta acción' 
+        });
+    }
+    
+    next();
+}
+
+// User management (admin only - solo ADMINPWCC)
+app.get('/api/users', requireAdminPWCC, (req, res) => {
     const users = readJSONFile('data/users.json');
     const usersWithoutPasswords = users.map(({ password, ...rest }) => rest);
     res.json(usersWithoutPasswords);
 });
 
-app.post('/api/users', (req, res) => {
+app.post('/api/users', requireAdminPWCC, (req, res) => {
     const { username, password, role } = req.body;
     const users = readJSONFile('data/users.json');
     
@@ -139,7 +154,7 @@ app.post('/api/users', (req, res) => {
     res.json({ success: true });
 });
 
-app.delete('/api/users/:username', (req, res) => {
+app.delete('/api/users/:username', requireAdminPWCC, (req, res) => {
     const { username } = req.params;
     const users = readJSONFile('data/users.json');
     
@@ -151,6 +166,15 @@ app.delete('/api/users/:username', (req, res) => {
     writeJSONFile('data/users.json', filteredUsers);
     
     res.json({ success: true });
+});
+
+// Health check endpoint (for uptime monitors)
+app.get('/health', (req, res) => {
+    res.json({ 
+        status: 'ok', 
+        timestamp: new Date().toISOString(),
+        service: 'PWCC Casilla Golf'
+    });
 });
 
 // Serve index page
