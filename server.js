@@ -86,9 +86,11 @@ app.post('/api/search', (req, res) => {
                 // Search in all fields
                 results = members.filter(m => 
                     m.nombres?.toLowerCase().includes(searchQuery) ||
+                    m.apellido?.toLowerCase().includes(searchQuery) ||
                     m.numeroSocio?.toString().includes(searchQuery) ||
                     m.ubicacion?.toLowerCase().includes(searchQuery) ||
-                    m.elemento?.toLowerCase().includes(searchQuery)
+                    m.elemento?.toLowerCase().includes(searchQuery) ||
+                    m.observacion?.toLowerCase().includes(searchQuery)
                 );
         }
     }

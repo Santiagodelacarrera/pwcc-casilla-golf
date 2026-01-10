@@ -1,0 +1,12 @@
+URL PARA CONFIGURAR EN UPTIME ROBOT:
+
+https://pwcc-casilla-golf.onrender.com/health
+
+O tu URL de Render + /health
+
+INSTRUCCIONES COMPLETAS:
+Ver archivo: CONFIGURAR-UPTIME-ROBOT-AHORA.md
+
+TIEMPO ESTIMADO: 5 minutos
+RESULTADO: Inicio < 5 segundos (gratis)
+

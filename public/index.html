@@ -37,10 +37,8 @@
                     <img src="logo.png" alt="PWCC Logo" class="logo-header">
                     <div class="header-info">
                         <h1>PWCC Casilla Golf</h1>
-                        <p>Sistema de Gestión de Casillas</p>
                     </div>
                     <div class="user-info">
-                        <span id="currentUser"></span>
                         <button id="logoutBtn" class="btn-logout">Cerrar Sesión</button>
                     </div>
                 </div>
@@ -49,60 +47,13 @@
             <!-- Search Section -->
             <section class="search-section">
                 <div class="search-container">
-                    <div class="search-controls">
-                        <input type="text" id="searchInput" placeholder="Buscar socio..." class="search-input">
-                        <select id="searchType" class="search-type">
-                            <option value="all">Buscar en todo</option>
-                            <option value="nombre">Por Nombre</option>
-                            <option value="apellido">Por Apellido</option>
-                            <option value="socio">Por N° Socio</option>
-                            <option value="locker">Por Locker/Ubicación</option>
-                        </select>
-                        <button id="searchBtn" class="btn-search">Buscar</button>
-                        <button id="clearBtn" class="btn-clear">Limpiar</button>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Buscar socio por nombre, apellido, número de socio, ubicación..." class="search-input">
+                        <button id="clearBtn" class="btn-clear" style="display: none;">✕</button>
                     </div>
                     <div class="results-info">
-                        <span id="resultsCount">Total: <span id="totalMembers">0</span> socios</span>
+                        <span id="resultsCount">Escribe para buscar...</span>
                     </div>
-                </div>
-            </section>
-
-            <!-- Chatbot Section -->
-            <section class="chatbot-section" id="chatbotSection">
-                <button id="chatbotToggle" class="btn-chatbot-toggle">
-                    Cambio Base de Datos PWCC Golf <span class="toggle-icon">▼</span>
-                </button>
-                <div id="chatbotPanel" class="chatbot-panel" style="display: none;">
-                    <div class="chatbot-header">
-                        <h3>Asistente para Cambios en Base de Datos</h3>
-                        <p>Describe el cambio que deseas realizar</p>
-                    </div>
-                    <div id="chatMessages" class="chat-messages"></div>
-                    <div class="chat-input-container">
-                        <textarea id="chatInput" placeholder="Ejemplo: Cambiar locker de Felipe Martinez (N° socio 1234) del locker A-1 al locker B-16"></textarea>
-                        <button id="sendChatBtn" class="btn-send">Enviar</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Admin Panel -->
-            <section id="adminPanel" class="admin-panel" style="display: none;">
-                <h3>Panel de Administración</h3>
-                <div class="admin-controls">
-                    <button id="showUsersBtn" class="btn-admin">Gestionar Usuarios</button>
-                </div>
-                <div id="userManagement" class="user-management" style="display: none;">
-                    <h4>Usuarios del Sistema</h4>
-                    <div class="add-user-form">
-                        <input type="text" id="newUsername" placeholder="Nuevo usuario">
-                        <input type="password" id="newPassword" placeholder="Contraseña">
-                        <select id="newUserRole">
-                            <option value="user">Usuario</option>
-                            <option value="admin">Administrador</option>
-                        </select>
-                        <button id="addUserBtn" class="btn-add-user">Agregar Usuario</button>
-                    </div>
-                    <div id="usersList"></div>
                 </div>
             </section>
 
@@ -125,23 +76,6 @@
                     </table>
                 </div>
             </section>
-
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h4>Prince of Wales Country Club</h4>
-                        <p>Las Arañas 1901, Santiago de Chile<br>La Reina, Región Metropolitana</p>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Contacto</h4>
-                        <p>Teléfono: <a href="tel:+56227575700">+56 2 2757 5700</a></p>
-                    </div>
-                    <div class="footer-section">
-                        <p>&copy; 2025 PWCC. Todos los derechos reservados.</p>
-                    </div>
-                </div>
-            </footer>
         </div>
     </div>
 
